@@ -132,8 +132,6 @@
     function saveSignup(event) {
       event.preventDefault();
       const user = document.getElementById("username").value;
-      // Här kan vi eventuellt lägga till funktionalitet för att spara användaruppgifterna
-      // För nu kommer vi bara spara användarnamnet i localStorage som ett exempel
       localStorage.setItem("loggedInUser", user);
       window.location.href = "home.html";
     }
