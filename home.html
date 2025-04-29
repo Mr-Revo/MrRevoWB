@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Min Profil</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0a0f2c, #020617);
+      color: #cde9ff;
+      overflow: hidden;
+    }
+
+    .background {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: radial-gradient(circle at center, #0a0f2c 0%, #010314 100%);
+      overflow: hidden;
+    }
+
+    .cube {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background: rgba(0, 255, 255, 0.05);
+      border: 1px solid rgba(0, 255, 255, 0.1);
+      animation: rotateCube 25s infinite linear;
+    }
+
+    .cube:nth-child(1) {
+      top: 20%;
+      left: 15%;
+    }
+
+    .cube:nth-child(2) {
+      top: 50%;
+      left: 40%;
+      animation-delay: 4s;
+    }
+
+    .cube:nth-child(3) {
+      top: 70%;
+      left: 70%;
+      animation-delay: 8s;
+    }
+
+    @keyframes rotateCube {
+      0% {
+        transform: rotate(0deg) translateY(0);
+      }
+      50% {
+        transform: rotate(180deg) translateY(20px);
+      }
+      100% {
+        transform: rotate(360deg) translateY(0);
+      }
+    }
+
+    .profile-box {
+      position: relative;
+      max-width: 600px;
+      margin: 100px auto;
+      padding: 40px;
+      background-color: rgba(0, 8, 20, 0.6);
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+      text-align: center;
+      z-index: 2;
+    }
+
+    .profile-box img {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      border: 3px solid #00f0ff;
+      box-shadow: 0 0 15px #00f0ff;
+      object-fit: cover;
+    }
+
+    .profile-box h1 {
+      font-size: 2.2em;
+      margin: 20px 0 10px;
+      font-family: 'Bebas Neue', sans-serif;
+      color: #00eaff;
+      text-shadow: 0 0 10px #00f0ff;
+    }
+
+    .profile-box .bio {
+      font-size: 1em;
+      color: #b0dbff;
+      line-height: 1.6;
+      margin: 15px 0 25px;
+    }
+
+    .profile-box .projects h2 {
+      color: #00e0ff;
+      border-bottom: 1px solid #00c8ff;
+      padding-bottom: 6px;
+      margin-bottom: 15px;
+      font-size: 1.3em;
+      text-shadow: 0 0 5px #00f0ff;
+    }
+
+    .profile-box .projects ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .profile-box .projects li {
+      margin: 8px 0;
+    }
+
+    .profile-box .projects a {
+      color: #00c8ff;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .profile-box .projects a:hover {
+      color: #00f0ff;
+      text-shadow: 0 0 10px #00f0ff;
+      text-decoration: underline;
+    }
+
+    .logout-btn {
+      display: inline-block;
+      margin-top: 25px;
+      color: #00f0ff;
+      text-decoration: underline;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .logout-btn:hover {
+      color: #fff;
+      text-shadow: 0 0 10px #00f0ff;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="background">
+    <div class="cube"></div>
+    <div class="cube"></div>
+    <div class="cube"></div>
+  </div>
+
+  <div class="profile-box">
+    <img src="https://i.postimg.cc/jjMvjhV7/87bfdb693b260817f95aa80cb373d719.jpg" alt="Profilbild">
+    <h1 id="usernameDisplay">Laddar...</h1>
+    <p class="bio">
+      Hej och välkommen!<br>
+      Jag är en senior FiveM-utvecklare med god kunskap inom Lua-skripting, texturdesign och 3D-modellering. Under flera år har jag arbetat med att skapa och optimera maximala rollspelsupplevelser för mina FiveM-projekt, detta inkluderar för både privata och offentliga projekt. Hos min tjänster är det kvalitet, stabilitet och prestanda som står i fokus.
+    </p>
+
+    <div class="projects">
+      <h2>Projekt</h2>
+      <ul>
+        <li><a href="chatta.html">💬 Chatta med mig</a></li> <!-- Länk till chatta.html -->
+        <li><a href="ongoing-projects.html">📦 Pågående Projekt</a></li> <!-- Länk till ongoing-projects.html -->
+        <li><a href="project-images.html">📸 Projektbilder</a></li> <!-- Länk till project-images.html -->
+        <li><a href="https://discord.gg/2mvvxBzcXh" target="_blank">💼 Lenix Development</a></li> <!-- Länk till Discord server -->
+      </ul>
+    </div>
+
+    <span class="logout-btn" onclick="logout()">Logga ut</span>
+  </div>
+
+  <script>
+    const username = localStorage.getItem('loggedInUser');
+    if (username) {
+      document.getElementById('usernameDisplay').textContent = username;
+    } else {
+      alert("Du är inte inloggad.");
+      window.location.href = "login.html";
+    }
+
+    function logout() {
+      localStorage.removeItem('loggedInUser');
+      alert("Du har blivit utloggad.");
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+</html>
